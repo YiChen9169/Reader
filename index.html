@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>慢慢讀 · 中英文朗讀</title>
+<link rel="stylesheet" href="style.css">
+<main><header><h1>慢慢讀．</h1><p>照自己的步調，聆聽每一句。</p></header>
+<section class="card">
+<div class="grid"><label>朗讀模式<select id="engine"><option value="local">瀏覽器語音（可選離線）</option value="cloud">Azure 神經語音（需網路及金鑰）</option></select></label><label>中英文混讀<select id="mix"><option value="switch">依語言切換聲音</option><option value="single">同一聲音讀完整句（請選多語言聲音）</option></select></label></div>
+<div id="localOptions" class="grid"><label>中文語音<select id="zh"></select></label><label>英文語音<select id="en"></select></label><label><input id="offline" type="checkbox"> 只顯示本機語音</label></div>
+<details id="cloudOptions" hidden><summary>Azure 語音設定</summary><p>按播放或試聽後，內容會傳送到 Microsoft Azure，可能依用量計費。金鑰只留在本次頁面記憶體，不會儲存。</p><div class="grid"><label>服務區域<input id="region" placeholder="例如 eastasia" autocomplete="off"></label><label>Speech 金鑰<input id="key" type="password" autocomplete="off"></label></div><button id="fetchVoices">載入可用語音</button><div class="grid"><label>中文聲音<select id="cloudZh"><option>zh-TW-HsiaoChenNeural</option></select></label><label>英文聲音<select id="cloudEn"><option>en-US-JennyNeural</option></select></label><label>整句多語言聲音<select id="multi"><option>en-US-AvaMultilingualNeural</option></select></label></div><p>雲端音訊可在播放中無中斷調速；目前句子會高亮，句內進度是估算值。</p></details>
+<div class="toolbar"><button id="preview">試聽聲音</button><label><input type="checkbox" id="skipUrls" checked> 跳過網址</label><label><input type="checkbox" id="follow" checked> 自動跟隨目前句子</label><label><input type="checkbox" id="remember" checked> 自動儲存內容與進度</label></div>
+<details><summary>自訂發音／品牌與縮寫</summary><p>每行輸入「原文=讀法」。例如 AI=A I、OpenAI=Open A I。會依輸入順序替換，不修改原文。</p><textarea id="rules" rows="3" placeholder="AI=A I"></textarea></details>
+<label for="text">貼上或編輯文字（點選文字間隙可設定起讀位置）</label><textarea id="text" spellcheck="false" placeholder="在這裡貼上中文或英文…"></textarea>
+<div class="toolbar"><button id="play" class="primary">▶ 播放</button><button id="pause" disabled>Ⅱ 暫停</button><button id="prev">上一句</button><button id="next">下一句</button><button id="reset">從頭開始</button><label class="speed">語速 <input id="rate" type="range" min="0.5" max="3" step="0.1" value="1"><output id="speed">1.0×</output></label></div>
+<div class="toolbar"><label>段落跳轉<select id="paragraph"><option value="0">第 1 段</option></select></label><button id="save">立即儲存</button><button id="clearSaved">清除已儲存內容</button></div>
+<progress id="progress" value="0" max="1" aria-label="朗讀進度"></progress><div class="footer"><span id="status" role="status">準備好了。</span><span id="count">0 字元 · 未設上限</span></div><p id="storageStatus" class="hint" role="status"></p>
+</section>
+<section class="card"><h2>跟讀視窗</h2><p class="hint">點選句子可設定起讀位置；只載入附近句子，方便閱讀長文。</p><div id="reading" aria-label="目前句子與上下文"></div></section>
+<p class="hint">文字未設字數上限，實際容量依記憶體而定；長文會分段朗讀。儲存空間另有瀏覽器限制，超出時會提示。<br>本機模式調速可能重讀目前片段；雲端模式調速直接套用音訊。語音的自然度與多語字詞發音依所選聲音而定。</p>
+<footer class="hint">Copyright &copy; 2026 YI-CHEN, YOU. All rights reserved.</footer>
+</main><script src="core.js"></script><script src="reader.js"></script></html>
